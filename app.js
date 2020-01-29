@@ -3,17 +3,22 @@ const app = express()
 const path = require('path')
 const nunjucks = require('nunjucks')
 const db = require('./models')
+const volleyball = require('volleyball')
 
 
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(volleyball)
+
 
 // aca estamos usando nunjucks
 app.engine('html', nunjucks.render); // como renderear templates html
 app.set('view engine', 'html'); // que extensiones de archivo tienen los templates
 nunjucks.configure('views', { noCache: true });
 
+
+// significa que las carpeta public va a ser visible al usuario! 
 app.use(express.static(path.join(__dirname, '/public')));
 
 // ruta principal

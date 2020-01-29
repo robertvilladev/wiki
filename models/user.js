@@ -1,6 +1,7 @@
 const S = require('sequelize')
 const sequelize = require('../db.js')
 class User extends S.Model { }
+
 User.init({
     name: {
         type: S.STRING,

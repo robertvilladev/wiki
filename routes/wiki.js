@@ -28,7 +28,7 @@ routes.post('/', (req, res, next) => {
             const user = values[0]
             const page = Page.create({
                 title: req.body.title,
-                content: req.body.content,
+                content: req.body.conten0t,
                 urltitle: req.body.title.split(" ").join('_')
             })
             return page.then((page) => {

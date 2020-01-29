@@ -5,6 +5,8 @@ const Tag = require('./tag')
 
 // relaciones entre tablas
 Page.belongsTo(User, { as: 'author' })
+
+
 Tag.belongsToMany(Page, { through: 'TagPages' });
 Page.belongsToMany(Tag, { through: 'TagPages' });
 
