@@ -1,12 +1,12 @@
 const express = require('express')
 const routes = express.Router()
-const { User, Page } = require('../models')
+const { User, Page, Tag } = require('../models')
+const Promise = require('bluebird')
 
 // ruta 
 routes.get('/', (req, res) => {
     Page.findAll()
         .then((values) => {
-            console.log(values)
             res.render('index.html', { pages: values })
         })
 })
@@ -15,6 +15,8 @@ routes.get('/add', (req, res) => {
     res.render('addpage.html')
 })
 
+
+// Ruta para crear paginas 
 routes.post('/', (req, res, next) => {
     User.findOrCreate({
         where: {
@@ -34,6 +36,28 @@ routes.post('/', (req, res, next) => {
                 return page
             })
         })
+        .then((page) => {
+            const tags = req.body.tags.split(' ')
+                .map(tag => {
+                    console.log(tag)
+                    return Tag.findOrCreate({
+                        where: {
+                            name: tag
+                        }
+                    })
+                        .then((val) => {
+                            console.log(val)
+                            return page.addTag(val)
+                        })
+                })
+
+            return Promise.all(tags)
+                .then((values) => {
+                    //console.log(values)
+                    //page.addTags(values)
+                    return page
+                })
+        })
         .then(function (page) {
             res.redirect(page.route);
         })
@@ -47,9 +71,15 @@ routes.get('/:urltitle', (req, res, next) => {
         }
     })
         .then((page) => {
-            return page.getAuthor()
-                .then((author) => {
-                    return { page, author }
+            return page.getTags()
+                .then((tags) => {
+                    return { page, tags: tags.map(p => p.name) }
+                })
+                .then((val) => {
+                    return val.page.getAuthor()
+                        .then((author) => {
+                            return { page: val.page, author, tags: val.tags }
+                        })
                 })
         })
         .then((value) => {
@@ -97,6 +127,7 @@ routes.post('/:urltitle/edit', (req, res, next) => {
         .then((page) => {
             page.content = req.body.content
             page.title = req.body.title
+            page.urltitle = req.body.title.split(" ").join('_')
 
             return page.save()
         })

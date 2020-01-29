@@ -2,6 +2,24 @@ body {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   }
+
+  p{
+    font-family: 'ubuntu';
+    font-size: 18px;
+    text-align: justify;
+  }
+
   a {
     color: #00B7FF;
+  }
+
+  .post{
+    box-sizing: border-box;
+    border-radius: 2px;
+/* s */
+
+  }
+  #f{
+    display: inline-block;
+    text-align: center;
   }

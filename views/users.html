@@ -5,11 +5,11 @@
 <hr>
 <ul class="list-unstyled">
     {%for user in users%}
-    <div>
+    <div class="d-inline-flex col-md-4">
         <h2>{{user.name}} <small><a href="users/{{user.id}}">Ver contenidos</a></small></h2>
         <p>{{user.email}}</p>
     </div>
     {%endfor%}
-    <script>console.log(('{{users}}'))</script>
+
 </ul>
 {% endblock %}

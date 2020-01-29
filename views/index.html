@@ -5,9 +5,7 @@
 <hr>
 <ul class="list-unstyled">
   {%for page in pages%}
-  <div>
-    <h3>{{page.title}} <small><a href="../wiki/{{page.urltitle}}">Leer pagina</a></small> </h3>
-  </div>
-  {%endfor%}
-</ul>
-{% endblock %}
+  <div class="d-inline-flex col-md-6 post">
+    <h3>{{page.title}} <small><a href=" ../wiki/{{page.urltitle}}">Leer pagina</a> </small> </h3>
+  </div> {%endfor%}
+</ul> {% endblock %}

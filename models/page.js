@@ -13,7 +13,7 @@ Page.init({
     },
 
     content: {
-        type: S.STRING,
+        type: S.TEXT,
         validate: {
             len: [0, 99999999999999]
         },
