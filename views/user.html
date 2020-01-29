@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>{{user.name}}</h2>
+<h5>{{user.email}}</h5>
+<p>Escribio {{pages.length}} articulo(s)</p>
+<hr>
+<h2>Articulos del Autor</h2>
+<ul class="list-unstyled">
+    {%for page in pages%}
+    <div>
+        <h3>{{page.title}} <small><a href="../wiki/{{page.urltitle}}">Leer pagina</a></small> </h3>
+    </div>
+    {%endfor%}
+</ul>
+{% endblock %}

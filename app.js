@@ -3,7 +3,7 @@ const app = express()
 const path = require('path')
 const nunjucks = require('nunjucks')
 const db = require('./models')
-const routes = require('./routes')
+
 
 
 app.use(express.urlencoded({ extended: true }))
@@ -16,7 +16,14 @@ nunjucks.configure('views', { noCache: true });
 
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.use('/', routes)
+// ruta principal
+const wiki = require('./routes/wiki.js')
+app.use('/wiki', wiki)
+
+const users = require('./routes/users.js')
+app.use('/users', users)
+
+app.use('/', (req, res) => res.redirect('/wiki/'))
 
 
 // midlleware que recoge todo slos errores
@@ -28,7 +35,7 @@ app.use('/', (error, req, res, next) => {
 // sincornizar
 const models = require('./models')
 
-models.db.sync({ force: true })
+models.db.sync(/* { force: true } */)
     .then(() => {
         // asegurate de reemplazar el nombre de abajo con tu app de express
         app.listen(3000, function () {

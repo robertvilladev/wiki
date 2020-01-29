@@ -14,6 +14,9 @@ Page.init({
 
     content: {
         type: S.STRING,
+        validate: {
+            len: [0, 99999999999999]
+        },
         allowNull: false
     },
 
@@ -29,9 +32,9 @@ Page.init({
     route: {
         type: S.VIRTUAL,
         get() {
-            return '/wiki/' + this.getDataValue(urltitle)
+            return '/wiki/' + this.getDataValue('urltitle')
         }
-    }
+    },
 }, { sequelize, modelName: 'page' })
 
 

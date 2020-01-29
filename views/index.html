@@ -6,8 +6,7 @@
 <ul class="list-unstyled">
   {%for page in pages%}
   <div>
-    <h2>{{page.title}}</h2>
-    <p>{{page.content}}</p>
+    <h3>{{page.title}} <small><a href="../wiki/{{page.urltitle}}">Leer pagina</a></small> </h3>
   </div>
   {%endfor%}
 </ul>

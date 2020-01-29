@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<form method="POST">
+    <input class="form-control " name="title" type="text" value="{{page.title}}">
+    <small> (<a href="{{page.urltitle}}/similar">Similar</a>)</small>
+
+    <h4>by <a href="../users/{{author.id}}">{{author.name}}</a></h4>
+    <div>PLACEHOLDER TAG LIST</div>
+    <hr />
+    <textarea class="form-control" name="content" class="page-body">{{page.content}}</textarea>
+    <hr />
+    <input type="submit" class="btn btn-primary" value="confirm">
+    <a href="{{page.id}}/delete" class="btn btn-danger">delete this page</a>
+
+</form>
+
+{% endblock %}

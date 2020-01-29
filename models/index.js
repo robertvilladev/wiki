@@ -1,6 +1,11 @@
 const db = require('../db.js')
-const Pages = require('./pages')
-const Users = require('./user')
+const Page = require('./pages')
+const User = require('./user')
 
-module.exports = { Pages, Users, db }
+//
+Page.belongsTo(User, { as: 'author' })
+
+
+
+module.exports = { Page, User, db }
 
